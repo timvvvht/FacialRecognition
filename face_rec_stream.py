@@ -5,7 +5,7 @@ import numpy as np
 import imutils
 import pandas as pd
 
-df = pd.read_pickle('custom_embeddings.pkl')
+df = pd.read_pickle('/Users/timwu/FacialRecognition/custom_embeddings.pkl')
 
 names = df.Name.tolist()
 encodings = df.Encodings.tolist()
