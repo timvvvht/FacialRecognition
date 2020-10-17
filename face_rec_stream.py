@@ -42,6 +42,7 @@ while True:
 
     for box, enc in zip(boxes, encoding):
         top, right, bottom, left = box
+        print(top, right, bottom, left)
         cv2.rectangle(frame, (left, top), (right, bottom), color=(255, 0, 0), thickness=2)
         y = top - 15 if top - 15 > 15 else top + 15
         cv2.putText(frame, knn(enc, encodings, names), (int((right + left) / 2), y),
