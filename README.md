@@ -7,7 +7,7 @@ The script uses the K-nearest neighbours algorithm to determine the closest matc
 # Embedding Model
 The <a href='face_rec_stream.py'>easy</a> way is to use the face_recognition library, which uses the dlib to predict high quality face embeddings with high precision. 
 
-The <a href ='Triplet_Loss/TripletLossModelTraining'>hard(er)</a> way is to train your own triplet loss model. For the embedding model, I used to Xception model in tensorflow, based on <a href='https://arxiv.org/pdf/1610.02357.pdf'>this paper</a> and loaded the pre-trained weights. 
+The <a href ='Triplet_Loss/TripletLossModelTraining'>hard(er)</a> way is to train your own triplet loss model. For the embedding model, I used to transfer learning from a pre-trained Xception model in tensorflow, based on <a href='https://arxiv.org/pdf/1610.02357.pdf'>this paper</a>. 
 
 I then added a Global Max Pooling layer (performed much better than Global Average Pooling and Flatten) and a 2 fully connected layers afterwards. 
 
