@@ -4,10 +4,21 @@ Facial Recognition is a python project that recognises faces from a webcam strea
 
 The script uses the K-nearest neighbours algorithm to determine the closest match (using Euclidean distance as the metric of choice) of the faces identified in the webcam stream to encodings previously extracted from a database of images.
 
-# Usage 
-1. Given a directory structure of ../database/identity/image.jpg, with at least K images per identity, run <a href='faWe wlce_rec_embeddings.ipynb'> this script</a> to obtain 128-dimensional face encoding arrays for each image in the database. 
+# Embedding Model
+The <a href='face_rec_stream.py'>easy</a> way is to use the face_recognition library, which uses the dlib to predict high quality face embeddings with high precision. 
 
-The most straight-forward approach for this task is to utilise the <a href='https://pypi.org/project/face-recognition/'>face recognition library</a>. 
+The <a href ='Triplet_Loss/TripletLossModelTraining'>hard(er)</a> way is to train your own triplet loss model. For the embedding model, I used to Xception model in tensorflow, based on <a href='https://arxiv.org/pdf/1610.02357.pdf'>this paper</a> and loaded the pre-trained weights. 
+
+I then added a Global Max Pooling layer (performed much better than Global Average Pooling and Flatten) and a 2 fully connected layers afterwards. 
+
+Each model was evaluated on my own dataset in this [notebook](Triplet_Loss/Triplet_Loss_model_eval.ipynb).
+
+The best model was able to recognize correct identities on my own dataset, with a k-nearest neighbors algorithm with an accuracy of 85%. 
+
+The model I trained performs reasonably well during the face-recognition from stream task, but was not as robust as using the face_recognition library.
+  
+# Face Recognition from stream 
+1. Given a directory structure of ../database/identity/image.jpg, with at least K images per identity, run <a href='face_rec_embeddings.ipynb'> this script</a> to obtain 128-dimensional face encoding arrays for each image in the database. 
 
 After obtaining face-encodings for each picture in the database, we will save the pandas dataframe containing such data into a pickle object for access in the live-facial recognition script.
 
@@ -19,4 +30,5 @@ Using Euclidean distance as the metric of choice, we will find the K-nearest enc
 
 Finally, we will output the highest frequency identity that are K-closest to the encoding read from the video stream. 
 
-The script for this implementation can be found <a href='face_rec_stream.py'>here</a>.
+The script for the implementation with the face recognition library can be found <a href='face_rec_stream.py'>here</a>.
+The script for the implementation with the custom trained model can be found [here](face_rec_stream_xception.py).
