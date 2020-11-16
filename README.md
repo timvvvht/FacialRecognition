@@ -5,8 +5,10 @@ Facial Recognition is a python project that recognises faces from a webcam strea
 The script uses the K-nearest neighbours algorithm to determine the closest match (using Euclidean distance as the metric of choice) of the faces identified in the webcam stream to encodings previously extracted from a database of images.
 
 # Embedding Model
+## The Easy Way
 The <a href='face_rec_stream.py'>easy</a> way is to use the face_recognition library, which uses the dlib to predict high quality face embeddings with high precision. 
 
+## The Hard(er) Way
 The <a href ='Triplet_Loss/TripletLossModelTraining'>hard(er)</a> way is to train your own triplet loss model. For the embedding model, I used to transfer learning from a pre-trained Xception model in tensorflow, based on <a href='https://arxiv.org/pdf/1610.02357.pdf'>this paper</a>. The model was trained on the CelebA dataset, found <a href='http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html'>here</a>, which contains ~200k images and ~10k identities. 
 
 I then added a Global Max Pooling layer (performed much better than Global Average Pooling and Flatten) and a 2 fully connected layers afterwards. 
